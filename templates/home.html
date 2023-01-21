@@ -2,15 +2,66 @@
 {% load static %}
 {% block  content %}
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <div id="home-content">
-                <h1>{{ title }}</h1>
-                <h3>{{ message }}</h3>
-                <h3>{{ users.count }}</h3>
-            </div>
-        </div>
+  <h1 class="my-3">Users</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example" class="d-flex">
+    <ul class="ms-auto pagination">
+      <li class="page-item">
+        <button class="page-link {% if not users.has_previous %} disabled {% endif %}" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+      {% for page in paginator.page_range %}
+        <li class="page-item {% if users.number == page %}active{% endif %}"><button class="page-link" href="{% url 'home' %}?page={{page}}&page_size={{ paginator.per_page }}">{{ page }}</button></li>
+      {% endfor %}
+      <li class="page-item">
+        <button class="page-link {% if not users.has_next %} disabled {% endif %}" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="my-3">
+    <button class="btn btn-primary" id="btn-get"> GET </button>
+    <button class="btn btn-warning" id="btn-post"> POST </button>
+    <button class="btn btn-secondary" id="btn-put"> PUT </button>
+    <button class="btn btn-danger" id="btn-delete"> DELETE </button>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h4>Request: </h4>
+      <div class="border border-2 border-dark h-100 my-3" id="input-request">
+      </div>
+      <button class="btn btn-primary">Submit</button>
     </div>
+    <div class="col-6">
+      <h4>Response: </h4>
+      <div class="border border-2 border-dark h-100 my-3" id="input-response">
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
