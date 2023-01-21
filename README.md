@@ -1,6 +1,6 @@
 # django-request-log
 
-## This app is simple CRUD user app and log all of requests on that app.
+## This app is a simple CRUD user app and logs all of the requests on that app.
 
 ## How to run
 
