@@ -29,7 +29,7 @@
     </ul>
   </nav>
 
-  <div class="my-3">
+  <div class="my-3 flex">
     <button class="btn btn-primary" id="btn-get"> GET </button>
     <button class="btn btn-warning" id="btn-post"> POST </button>
     <button class="btn btn-secondary" id="btn-put"> PUT </button>
@@ -37,7 +37,11 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <h4>Request: </h4>
+      <div class="d-flex">
+        <h4>Request: </h4>
+        <button class="btn btn-primary ms-auto" id="btn-submit">Submit</button>
+      </div>
+
       <div class="border border-2 border-dark my-3" style="height: 300px;" id="input-request">
         <div class="m-3">
           <div id="status" class="fw-bold">METHOD NOT SELECTED</div>
@@ -87,10 +91,12 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary" id="btn-submit">Submit</button>
     </div>
     <div class="col-6">
-      <h4>Response: </h4>
+      <div class="d-flex">
+        <h4>Response: </h4>
+        <button class="btn btn-primary invisible">123</button>
+      </div>
       <div class="border border-2 border-dark my-3 p-3" style="height: 300px;" id="input-response">
       </div>
     </div>

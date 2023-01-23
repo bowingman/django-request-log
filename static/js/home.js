@@ -124,6 +124,10 @@ $(document).ready(function () {
   });
 
   $("#btn-submit").click(function () {
+    if (status == "Not Selected") {
+      $("#input-response").html("METHOD NOT SELECTED");
+      return;
+    }
     $("#input-response").html("Loading...");
 
     values = {
