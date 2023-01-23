@@ -6,7 +6,6 @@ $.ajaxSetup({
         var cookies = document.cookie.split(";");
         for (var i = 0; i < cookies.length; i++) {
           var cookie = jQuery.trim(cookies[i]);
-          // Does this cookie string begin with the name we want?
           if (cookie.substring(0, name.length + 1) == name + "=") {
             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
             break;
@@ -16,7 +15,6 @@ $.ajaxSetup({
       return cookieValue;
     }
     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-      // Only send the token to relative URLs i.e. locally.
       xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
     }
   },
@@ -95,7 +93,6 @@ function getErrorMsg(data) {
 }
 
 $(document).ready(function () {
-  // your code here
   getUsersList();
   let status = "Not Selected";
   let page, page_size;
@@ -154,10 +151,6 @@ $(document).ready(function () {
             data,
             document.getElementById("input-response")
           );
-
-          // tree.expand(function (node) {
-          //   return node.childNodes.length < 2;
-          // });
         },
         error: function (data) {
           $("#input-response").html(data.responseJSON.detail);
@@ -247,11 +240,6 @@ $(document).ready(function () {
         success: function (data) {
           $("#input-response").html("Successfully deleted.");
           getUsersList();
-          // var tree = jsonTree.create(
-          //   data,
-          //   document.getElementById("input-response")
-          // );
-          // handle the returned data here
         },
         error: function (data) {
           $("#input-response").html(data.responseJSON.detail);
@@ -262,23 +250,15 @@ $(document).ready(function () {
 });
 
 function getUsersList() {
-  console.log("error", getPageInfo());
   pageInfo = getPageInfo();
 
-  // history.pushState({}, "", `/home/?page=${page}&page_size=${page_size}`);
   $("tbody").html(`
     <tr>
       <td colspan="5" class="text-center">Loading...</td>
     </tr>`);
   $.ajax({
     url: `/api/users/?page=${pageInfo.page}&page_size=${pageInfo.page_size}`,
-    // data: {
-    //   page: searchParams.get("page"),
-    //   page_size: searchParams.get("page_size"),
-    // },
     success: function (data) {
-      console.log(data);
-      // handle the returned data here
       if (data.length === 0) {
         $("tbody").html(`<tr>
             <td colspan="5" class="text-center">No Users</td>
@@ -322,7 +302,6 @@ function getUsersList() {
       $(".pagination").html(paginationHtml);
     },
     error: function (data) {
-      console.log(data.responseJSON);
       $("tbody").html(`<tr>
       <td colspan="5" class="text-center">${data.responseJSON.detail}</td>
     </tr>`);
