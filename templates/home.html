@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block custom_css %} 
+<link href="{% static 'css/jsonTree.css' %}" rel="stylesheet" />
+{% endblock custom_css %}
+
 {% block  content %}
 <div class="container">
   <h1 class="my-3">Users</h1>
@@ -14,32 +19,13 @@
       </tr>
     </thead>
     <tbody>
-      {% for user in users %}
-        <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.first_name }}</td>
-          <td>{{ user.last_name }}</td>
-        </tr>
-      {% endfor %}
+      <tr>
+        <td colspan="5" class="text-center">No Users</td>
+      </tr>
     </tbody>
   </table>
   <nav aria-label="Page navigation example" class="d-flex">
     <ul class="ms-auto pagination">
-      <li class="page-item">
-        <button class="page-link {% if not users.has_previous %} disabled {% endif %}" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </button>
-      </li>
-      {% for page in paginator.page_range %}
-        <li class="page-item {% if users.number == page %}active{% endif %}"><button class="page-link" href="{% url 'home' %}?page={{page}}&page_size={{ paginator.per_page }}">{{ page }}</button></li>
-      {% endfor %}
-      <li class="page-item">
-        <button class="page-link {% if not users.has_next %} disabled {% endif %}" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </button>
-      </li>
     </ul>
   </nav>
 
@@ -52,16 +38,68 @@
   <div class="row">
     <div class="col-6">
       <h4>Request: </h4>
-      <div class="border border-2 border-dark h-100 my-3" id="input-request">
+      <div class="border border-2 border-dark my-3" style="height: 300px;" id="input-request">
+        <div class="m-3">
+          <div id="status" class="fw-bold">METHOD NOT SELECTED</div>
+          <div id="get-content">
+            <div class="row my-2">
+              <div class="col-4">
+                <label> USER ID:</label>
+              </div>
+              <div class="col-8">
+                <input id="userid" placeholder="USERID" type="number" />
+              </div>
+            </div>
+          </div>
+          <div id="post-content">
+            <div class="row my-2">
+              <div class="col-4">
+                <label> USERNAME:</label>
+              </div>
+              <div class="col-8">
+                <input id="username" placeholder="USERNAME"/>
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col-4">
+                <label> EMAIL:</label>
+              </div>
+              <div class="col-8">
+                <input id="email" placeholder="EMAIL"/>
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col-4">
+                <label> FIRST NAME:</label>
+              </div>
+              <div class="col-8">
+                <input id="firstname" placeholder="FIRST NAME" />
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col-4">
+                <label> LAST NAME:</label>
+              </div>
+              <div class="col-8">
+                <input id="lastname" placeholder="LAST NAME" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button class="btn btn-primary">Submit</button>
+      <button class="btn btn-primary" id="btn-submit">Submit</button>
     </div>
     <div class="col-6">
       <h4>Response: </h4>
-      <div class="border border-2 border-dark h-100 my-3" id="input-response">
+      <div class="border border-2 border-dark my-3 p-3" style="height: 300px;" id="input-response">
       </div>
     </div>
   </div>
 </div>
 
 {% endblock content %}
+
+{% block custom_js %}
+  <script src="{% static 'js/jsonTree.js' %}"></script>
+  <script src="{% static 'js/home.js' %}"></script>
+{% endblock custom_js %}
