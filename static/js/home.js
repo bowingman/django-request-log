@@ -233,19 +233,33 @@ $(document).ready(function () {
         return;
       }
 
-      $.ajax({
-        url: `/api/users/${values.USERID}/`,
-        type: "DELETE",
-        data: {},
-        success: function (data) {
-          $("#input-response").html("Successfully deleted.");
-          getUsersList();
-        },
-        error: function (data) {
-          $("#input-response").html(data.responseJSON.detail);
-        },
-      });
+      $("#confirm-modal").show();
     }
+  });
+
+  $("#confirm-delete-button").click(function () {
+    $("#confirm-modal").hide();
+
+    $.ajax({
+      url: `/api/users/${values.USERID}/`,
+      type: "DELETE",
+      data: {},
+      success: function (data) {
+        $("#input-response").html("Successfully deleted.");
+        getUsersList();
+      },
+      error: function (data) {
+        $("#input-response").html(data.responseJSON.detail);
+      },
+    });
+  });
+
+  $(".btn-close").click(function () {
+    $("#confirm-modal").hide();
+  });
+
+  $("#cancel-delete-button").click(function () {
+    $("#confirm-modal").hide();
   });
 });
 
