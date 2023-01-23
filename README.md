@@ -9,3 +9,12 @@
 `python manage.py migrate`
 
 `python manage.py runserver`
+
+## DataBase
+
+- Added Request Log Model
+  - Fields: `method`, `path`, `remote_address`, `timestamp`
+
+## Other Libaries
+
+- Added `JsonTree`
