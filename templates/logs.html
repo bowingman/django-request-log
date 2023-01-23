@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block  content %}
+<div class="container">
+  <h1 class="my-3">Request Logs</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">method</th>
+        <th scope="col">path</th>
+        <th scope="col">remote_address</th>
+        <th scope="col">timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in logs %}
+        <tr>
+          <td>{{ log.id }}</td>
+          <td>{{ log.method }}</td>
+          <td>{{ log.path }}</td>
+          <td>{{ log.remote_address }}</td>
+          <td>{{ log.timestamp }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

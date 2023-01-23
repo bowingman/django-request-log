@@ -1,6 +1,4 @@
 from django.views import View
-from django.core.paginator import Paginator
-from django.contrib.auth.models import User
 from django.shortcuts import render
 
 
